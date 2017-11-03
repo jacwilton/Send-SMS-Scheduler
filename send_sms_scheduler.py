@@ -8,9 +8,13 @@ auth_token  = "account token"
 
 client = Client(account_sid, auth_token)
 
-
+#Outbound list of contacts. Include +1 before 10 digit phone number for USA based phone numbers
 listnums= ["+19999999999", "+19999999999"]
+
+#Sent from phone number. Phone number must be approved by twilio before messages can be sent
 outbound= ["+19999999999"]
+
+#Text to be included in outbound text message to receipients. 
 text = [" Drain battery."]
 
 def job_function():
@@ -27,7 +31,7 @@ def job_function():
 		
 sched = BlockingScheduler()
 
-#Schedule job function to be called every 60 seconds
+#Schedule job function to be called every 60 seconds. Can change to: seconds, minutes, hours, or days
 sched.add_job(job_function, 'interval', seconds = 10)
 
 sched.start()
