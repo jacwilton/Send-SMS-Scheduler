@@ -4,24 +4,20 @@ from apscheduler.scheduler import Scheduler
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 # Your Account SID from twilio.com/console
-account_sid = " account_id"
+account_sid = ""
 # Your Auth Token from twilio.com/console
-auth_token  = "account token"
+auth_token  = ""
 
 client = Client(account_sid, auth_token)
 
 #Outbound list of contacts. Include +1 before 10 digit phone number for USA based phone numbers
-listnums= ["+19999999999", "+19999999999"]
+listnums= ["+19999999999"]
 
 #Sent from phone number. Phone number must be approved by twilio before messages can be sent
 outbound= ["+19999999999"]
 
 #Text to be included in outbound text message to receipients. 
 listtext = ["quote 1", "quote 2", "quote 3"]
-
-# Start the scheduler
-sched = Scheduler()
-sched.start()
 
 def job_function():
 	for num in listnums:
