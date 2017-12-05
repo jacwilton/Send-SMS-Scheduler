@@ -1,4 +1,6 @@
 from twilio.rest import Client
+from datetime import date
+from apscheduler.scheduler import Scheduler
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 # Your Account SID from twilio.com/console
@@ -15,7 +17,11 @@ listnums= ["+19999999999", "+19999999999"]
 outbound= ["+19999999999"]
 
 #Text to be included in outbound text message to receipients. 
-text = [" Drain battery."]
+listtext = ["quote 1", "quote 2", "quote 3"]
+
+# Start the scheduler
+sched = Scheduler()
+sched.start()
 
 def job_function():
 	for num in listnums:
@@ -25,7 +31,7 @@ def job_function():
 		message = client.messages.create(
   			to= num,
     		from_= outbound,
-    		body=  text)
+    		body=  listtext)
 
 	print((message.sid) + " Text Message 1 has sent!" + str(text))
 		
@@ -34,4 +40,5 @@ sched = BlockingScheduler()
 #Schedule job function to be called every 60 seconds. Can change to: seconds, minutes, hours, or days
 sched.add_job(job_function, 'interval', seconds = 10)
 
+# Start the scheduler
 sched.start()
